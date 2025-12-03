@@ -154,3 +154,10 @@ Your FBX must have: A skeleton hierarchy,  Keyframed animation data,  A root bon
 | **Unity Humanoid** | Full | Works as long as names follow expected pattern |
 | **Blender Rigify** | Good | Must bake animation before export |
 | **Reallusion CC/iClone** | Full | Very reliable — standard naming |
+
+
+**Iclone exporting Settings:**
+
+<img width="678" height="604" alt="image" src="https://github.com/user-attachments/assets/832962e3-de85-496e-8733-c9cc609c13f4" />
+
+
