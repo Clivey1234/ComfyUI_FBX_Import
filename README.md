@@ -1,344 +1,156 @@
-🕺 FBX Animations to OpenPose ComfyUI Node
+# FBX Pose Blender BODY25 Match — ComfyUI Node  
+Convert FBX animations into stable BODY-25 pose images aligned to any reference stickman.
 
-FBX ComfyUI Director allows you to take a FBX animation and convert it into an OpenPose compatible imageset
-It can directly feed them into nodes like Wan22FunControlToVideo
+---
 
-⭐ Features
-✔ Converts any FBX animation into a sequence of BODY-25 / OpenPose style stickman frames
-✔ Aligns the animation to any reference OpenPose/DWPose image
-✔ Stable global scaling (no zoom jitter)
-✔ Upper-body / full-body detection & cropping
-✔ Auto face-camera yaw alignment
-✔ Supports root motion or in-place mode
-✔ Optional Perspective projection mode (experimental)
-✔ Automatic padding when fewer frames exist than requested
-✔ Designed for WAN2.2, AnimateDiff, Reactors, T2I-Adapters, and all pose-guided pipelines
+## ⭐ Features
 
-📦 Requirements
-Dependency	Version	Required?	Notes
-Blender	3.6+	✔ Yes	Runs fbx_pose_extract.py via CLI
-ComfyUI	Latest	✔ Yes	Node integrates into the custom_nodes folder
-Python 3.10–3.11	ComfyUI’s environment	✔ Yes	No external pip installs needed
-FBX file	Any	Required at runtime	Animation is extracted per-frame
-NVIDIA GPU	Recommended	Optional	Only required for downstream AI workflows
+- Converts any **FBX animation** into a sequence of **BODY-25/OpenPose** pose frames  
+- Aligns animation to a **reference OpenPose/DWPose image**  
+- Stable **global scaling** (no zoom jitter)  
+- Supports **upper-body** or **full-body** matching  
+- Automatic **face-camera** orientation  
+- Optional **perspective projection mode**  
+- Handles **root motion** or **in-place** animation  
+- Automatic padding when fewer frames exist than requested  
+- Designed for **WAN2.2**, **AnimateDiff**, **Reactor**, **ControlNet**, **T2I Adapters**, etc.
 
-Blender 3.6 is mandatory
-Older versions may not have compatible FBX import/export APIs.
+---
 
-Download Blender 3.6 LTS:
+## 📦 Requirements
+
+| Dependency | Version | Required | Notes |
+|-----------|----------|----------|-------|
+| **Blender** | **3.6+** | ✔ | Must be installed for FBX extraction |
+| **ComfyUI** | Latest | ✔ | Node integrates into `custom_nodes` |
+| **Python** | 3.10–3.11 | ✔ | Use ComfyUI’s environment |
+| **FBX File** | Any animated FBX | ✔ | Must contain armature + animation |
+| **GPU** | Optional | – | Only required for downstream AI generation |
+
+Download Blender 3.6 LTS:  
 https://www.blender.org/download/lts/3-6/
 
-📥 Installation
-1. Install/Update Blender
+---
 
-Download & install Blender 3.6+.
+## 📥 Installation
 
-Ensure the path in the node matches your installation, such as:
+### 1. Install Blender 3.6+
+Ensure Blender is installed at a path similar to:
 
-C:\Program Files\Blender Foundation\Blender 3.6\blender.exe
 
-2. Add The Node To ComfyUI
+---
 
-Place the folder:
+## 🎥 How It Works
 
-fbx_pose_body25_match/
+### Step 1 — Animation Extraction  
+A headless Blender instance runs `fbx_pose_extract.py`, which:
 
+- Loads your FBX  
+- Samples frames from the animation  
+- Outputs `joint_data.json` with 3D joint positions per frame
 
-into:
+### Step 2 — 3D → 2D Projection  
+The node converts FBX joints into a BODY-25 stickman:
 
-ComfyUI/custom_nodes/
+- Yaw correction (Auto Face Camera)  
+- Orthographic or perspective projection  
+- Whole-animation bounding box scaling (prevents zoom jitter)  
 
+### Step 3 — Optional Reference Pose Alignment  
+If you supply a stickman image (OpenPose/DWPose):
 
-Your folder should contain:
+- Bounding box is extracted from non-black pixels  
+- Your FBX animation is scaled + centered to match it  
+- If the ref is upper-body → legs are cropped automatically  
 
-__init__.py
-fbx_pose_extract.py
-fbx_pose_helpers_body25.py
-fbx_pose_helpers_body25_match.py
-fbx_pose_node_body25_match.py
+### Step 4 — Stickman Drawing  
+Finally, the skeleton is drawn into clean 2D frames using:
 
-3. Restart ComfyUI
+- OpenPose / ControlNet colors  
+- Adjustable line/joint sizes  
+- Optional FACE-70 pairing
 
-The node will appear under:
+---
 
-Animation → FBX
+## 🧭 Node Parameters (Every Setting Explained)
 
-🎥 How It Works (Technical Overview)
-Step 1 — Blender extracts animation frames
+### 🔧 FBX Input  
+- **Blender_Executable** — path to Blender 3.6+  
+- **FBX_File** — path to your animated FBX  
 
-A bundled Python script (fbx_pose_extract.py) is executed via Blender.
-It samples your FBX animation based on either:
+### 🎞 Frame Extraction  
+- **Frame_Mode**  
+  - `Frame_Spread_TotalAnim` (even distribution)  
+  - `Frame_Range` (manual range)  
+- **Num_Frames** — total output frames  
+- **Start_Frame / End_Frame / Frame_Step** — used in range mode  
+- If fewer frames exist → last frame is padded  
 
-Spread across whole animation
+### 🖼 Output Settings  
+- **Output_Width / Output_Height** — resolution of output pose images  
 
-Explicit frame range selection
+### 🎥 Camera & Projection  
+- **Camera_View**  
+  - Front / Back / Left Side / Right Side / Top / Auto  
+- **Projection_Mode**  
+  - `Orthographic (Stable)`  
+  - `Perspective (Experimental)`  
 
-It outputs:
+### 🎨 Appearance  
+- **Color_Mode**  
+  - White / OpenPose / ControlNet Colors  
+- **Face_Mode**  
+  - Off / BODY-25 dots / FACE-70 full  
+- **Joint_Size** — radius of circles  
+- **Line_Thickness** — bone line width  
 
-joint_data.json
+### 📏 Scaling & Motion  
+- **Zoom_Factor** — global scale of pose  
+- **Inplace**  
+  - ON → remove root motion  
+  - OFF → preserve root motion  
 
+### 🎯 Reference Alignment  
+- **Alignment_Mode**  
+  - Off  
+  - Match Full Body  
+  - Upper Body (Head-Hips)  
+  - Auto (Full/Partial)  
+- **Ref_Pose_Image** — optional stickman image input  
 
-containing 3D joint coordinates per frame.
+---
 
-Step 2 — Node converts 3D → 2D (BODY-25)
+## 📤 Outputs
 
-Internally, we:
+### **Pose_Images**
+A ComfyUI tensor containing the entire sequence of BODY-25 pose frames.
 
-Apply yaw rotation (Auto Face Camera mode)
+### **Frame_Info**
+A JSON string including:
 
-Apply world→view projection
+- FBX file  
+- Frame extraction settings  
+- Camera view  
+- Alignment mode  
+- Projection mode  
+- Final scaling/centering information  
 
-Apply orthographic or perspective scaling
+---
 
-Stabilize the entire animation using whole-animation bounding boxes
+✅ Supported FBX Files
 
-Step 3 — Optional Reference Pose Matching
+The node supports any FBX file that meets the following conditions:
 
-If you input a reference stickman (OpenPose/DWPose image):
+✔ 1. The FBX contains an Armature (Skeleton)
 
-Non-black pixels → define bounding box
+Your FBX must have: A skeleton hierarchy,  Keyframed animation data,  A root bone (hips/root,  Standard humanoid proportions
 
-Your FBX pose frames are globally scaled, centered, and aligned
+## 📦 Supported FBX
 
-If reference is upper-body → legs are removed & cropped
-
-Step 4 — Pose drawing
-
-The node draws the BODY-25 skeleton with:
-
-Custom line thickness
-
-Custom joint size
-
-OpenPose or ControlNet color schemes
-
-Optional face dots / full FACE-70 overlay
-
-Output as an image tensor
-
-🧭 Node Parameters (Every Button Explained)
-
-Below is a complete, user-friendly explanation of every control.
-
-🔧 Input Settings
-Blender_Executable
-
-Path to Blender 3.6+.
-Used to run the extractor script in headless mode.
-
-FBX_File
-
-Path to your FBX animation.
-
-🎞 Frame Extraction
-Frame_Mode
-
-Choose how to select frames:
-
-Frame_Spread_TotalAnim
-
-Divides the FBX animation evenly into Num_Frames samples.
-
-Frame_Range
-
-Allows manual control using:
-
-Start_Frame
-
-End_Frame
-
-Frame_Step
-
-Num_Frames
-
-How many images to generate.
-
-If the animation has fewer frames than requested, the last frame is repeated until the count matches.
-
-Start_Frame / End_Frame / Frame_Step
-
-Used only with Frame_Range.
-
-🖼 Output
-Output_Width / Output_Height
-
-Resolution of the pose images.
-
-🎥 Camera & Projection
-Camera_View
-
-Choose projection angle:
-
-Front
-
-Back
-
-Left Side
-
-Right Side
-
-Top
-
-Auto (Face Camera) → auto-detects and rotates the body to face the camera
-
-Projection_Mode
-Orthographic (Stable) (default)
-
-No depth distortion.
-Perfect for ControlNet/WAN.
-
-Perspective (Experimental)
-
-Simulates depth scaling when root motion is enabled.
-
-🎨 Appearance Options
-Color_Mode
-
-White
-
-OpenPose-style colors
-
-ControlNet Colors
-
-Face_Mode
-
-Off
-
-Dots Only (BODY-25 face keypoints)
-
-Full Face (FACE-70 expanded face mesh)
-
-Joint_Size
-
-Radius of joint circles.
-
-Line_Thickness
-
-Width of bone lines.
-
-📏 Scaling & Motion Behaviour
-Zoom_Factor
-
-Global scale multiplier.
-
-Inplace
-
-True → Character is locked in place (removes root motion)
-
-False → Uses full root motion + global bounding box stabilization
-
-🎯 Reference Pose Matching
-Alignment_Mode
-
-Choose how to match to a reference pose image:
-
-Off
-
-Match Full Body
-
-Upper Body (Head-Hips)
-
-Auto (Full/Partial) → detects whether the reference is upper-body only
-
-Ref_Pose_Image
-
-Input any OpenPose/DWPose stickman (e.g. from WAN2.2):
-
-Defines expected bounding box
-
-Your FBX pose is scaled + centered to match
-
-Optional leg removal (if upper-body)
-
-📤 Outputs
-Pose_Images
-
-The generated 2D pose frames as a Comfy image tensor.
-
-Frame_Info
-
-A JSON string describing:
-
-FBX file
-
-Frame sampling
-
-camera view
-
-projection mode
-
-scaling
-
-alignment decision (full/upper)
-
-skeleton style
-
-Use this for debugging or automations.
-
-🌈 Example Workflows
-1. FBX → BODY-25 → WAN2.2 Pose Condition
-Load FBX → FBX_BODY25_MATCH → WAN2.2 → Video Generation
-
-2. Match FBX Animation to Real Human Pose
-YourPose.png → FBX_BODY25_MATCH → Image/Video Generator
-
-3. Stabilize Jittery Mocap Before Feeding to AI
-FBX Mocap → FBX_BODY25_MATCH (InPlace ON) → ControlNet Pose
-
-🧪 Troubleshooting
-"Blender executable not found"
-
-Make sure your path is correct and has no quotes:
-
-C:\Program Files\Blender Foundation\Blender 3.6\blender.exe
-
-"joint_data.json not produced"
-
-Check:
-
-Blender version ≥ 3.6
-
-FBX loads correctly in Blender
-
-Your file path has no non-ASCII characters
-
-Pose appears too small/large
-
-Increase or decrease Zoom_Factor.
-
-Upper-body mode still shows legs
-
-Ensure Alignment_Mode = Upper Body (Head-Hips)
-or the reference image itself is upper-body.
-
-🧱 Folder Structure
-📂 fbx_pose_body25_match
- ├── __init__.py
- ├── fbx_pose_helpers_body25.py
- ├── fbx_pose_helpers_body25_match.py
- ├── fbx_pose_node_body25_match.py
- └── fbx_pose_extract.py   ← Runs inside Blender
-
-🤝 Contributing
-
-Pull requests are welcome!
-Ideas especially appreciated:
-
-Better face mapping
-
-Improved sideways face logic
-
-More skeleton types (BODY70, SMPL, Mixamo)
-
-📄 License
-
-MIT License — free to use commercially & modify.
-
-🚀 Want help writing a banner image or project logo?
-
-I can generate one styled to match your node’s visual identity.
-
-Want auto-generated GIF examples?
-I can produce those too.
-
-Just ask!
+| Skeleton | Supported | Notes |
+|-----------|----------|----------|
+| **Mixamo** | Full | Fully tested, auto-detects joints |
+| **Unreal Mannequin** | Full | Works via joint-name remapping |
+| **Unity Humanoid** | Full | Works as long as names follow expected pattern |
+| **Blender Rigify** | Good | Must bake animation before export |
+| **Reallusion CC/iClone** | Full | Very reliable — standard naming |
