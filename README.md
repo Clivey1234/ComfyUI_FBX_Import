@@ -1,11 +1,7 @@
-.
+🕺 FBX Animations to OpenPose ComfyUI Node
 
-🕺 FBX Pose Blender BODY25 Match — ComfyUI Node
-
-Convert FBX Animations Into Stable BODY-25 Pose Images Aligned To Any Reference Stickman
-
-
-(Add your own banner here)
+FBX ComfyUI Director allows you to take a FBX animation and convert it into an OpenPose compatible imageset
+It can directly feed them into nodes like Wan22FunControlToVideo
 
 ⭐ Features
 ✔ Converts any FBX animation into a sequence of BODY-25 / OpenPose style stickman frames
@@ -14,9 +10,10 @@ Convert FBX Animations Into Stable BODY-25 Pose Images Aligned To Any Reference 
 ✔ Upper-body / full-body detection & cropping
 ✔ Auto face-camera yaw alignment
 ✔ Supports root motion or in-place mode
-✔ Optional Perspective projection mode
+✔ Optional Perspective projection mode (experimental)
 ✔ Automatic padding when fewer frames exist than requested
 ✔ Designed for WAN2.2, AnimateDiff, Reactors, T2I-Adapters, and all pose-guided pipelines
+
 📦 Requirements
 Dependency	Version	Required?	Notes
 Blender	3.6+	✔ Yes	Runs fbx_pose_extract.py via CLI
