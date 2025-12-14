@@ -109,15 +109,22 @@ Your FBX must have: A skeleton hierarchy,  Keyframed animation data,  A root bon
 
 
 **Camera Director**   (Its more of a Skeleton Director than camera)
-I would always advise to disable the Wan22FunControlToVideo until you are happy with the animation, then re-enable it to generate the video
+
+I would always advise to disable the Wan22FunControlToVideo until you are happy with the animation, then re-enable it to generate the video.
 There are two main controls, rotation and zoom.
+
+**Rotation**
 With rotation, if the FBX animation is 'InPlace' the rotation will rotation the OpenPose in an orbital basis where the FBX skeleton is the center of the pivot. so you are rotating on X0 Y0 of the object (assuming the fbx was created properly)
 If the FBX animation is a root, the pivot point is offset to the further distance of the animation from X0 Y), which means the slightest change in rotation values will manifest in perceived larger rotation depending on how fat the animation has moved from X0Y0. 
 So because the rotation works on degrees, 5 Degrees change can on a root anim where the skeleton is only 5m away from X0 Y0, may result in a small rotation, but if the anim is 30m away from X0Y0, the that same 5 degrees will move the animation alot more than thr 5m one. There is a Pivot.png in the Images folder of this custom node that may explain it better!
 
+**Zoom**
+
 Zoom is just what it says it is. 1.0 is the scale set as the default size in the Apose Image. The size of the person may vary on screen, but no matter their size, they will always be 1.0. A 0.1 increment either negative or positive is essential 10% of the original size, so of you zoom to -0.1, you are effectively shrinking by 90%.  If you want to disable the scale then set "Use 1st Image Ref Pose" Node to 'No' (purple color node)
 
 Both work by Frame number then a , (comma) then a value
+
+**Contraints**
 
 Rules. There are inbuilt restrictions that will prevent the animation from changing.
 1. You cannot have negative frame numbers
@@ -138,10 +145,7 @@ e.g for rotation you can do
 
 What this means is that from frame 0 to 30 it will rotate evenly from 0 to 20 degrees, then from 30 to 50, it will evenly rotate from 20 to -20 degrees (40 degree change). Then from 50 to 70 it wont rotate as the values are the same and then from 70 to 90 it will rotate from -20 to positive 5 degrees
 
-
-
-
-Defaults: 
+**Defaults:** for best results 
 Camera View: Front
 Projection Mode: Perspective
 Color Mode: ControNet Colors
