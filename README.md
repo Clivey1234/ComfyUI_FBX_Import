@@ -17,6 +17,7 @@ Convert FBX animations into Controlnet Openpose images
 - Untested in Linux, I dont have it, so dont ask, Fork away if you want to recode for Linux
 - I steered away from Autodesk SDK due to them changing older SDK versions to remove python support
 - My testing machine: Windows 11, Comfyui portable, Blender 3.6, 5070ti 16GB VRAM, i5-14600K, 64GB DDR5
+- Not tested on Comfyui Desktop (just Portable)
 
 [![Watch the video](https://img.youtube.com/vi/GLFpgOq_m_c/maxresdefault.jpg)](https://youtu.be/GLFpgOq_m_c)
 
@@ -36,7 +37,7 @@ Convert FBX animations into Controlnet Openpose images
 |-----------|----------|----------|-------|
 | **Blender** | **3.6+** | ✔ | Must be installed for FBX extraction |
 | **ComfyUI** | Latest | ✔ | Node integrates into `custom_nodes` |
-| **Python** | 3.10–3.11 | ✔ | Use ComfyUI’s environment |
+| **Python** | 3.10 + | ✔ | Use ComfyUI’s environment |
 | **FBX File** | supported animated FBX | ✔ | Must contain armature + animation |
 
 Download Blender 3.6 LTS:  
