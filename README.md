@@ -1,21 +1,13 @@
 # FBX Pose Blender BODY25 Match — ComfyUI Node  
-Convert FBX animations into stable BODY-25 pose images aligned to any reference stickman.
-
+Convert FBX animations into Controlnet Openpose images
 ---
 
 ## ⭐ Features
 
-- Converts any **FBX animation** into a sequence of **BODY-25/OpenPose** pose frames  
-- Aligns animation to a **reference OpenPose/DWPose image**  
-- Stable **global scaling** (no zoom jitter)  
-- Supports **upper-body** or **full-body** matching  
-- Automatic **face-camera** orientation  
-- Optional **perspective projection mode**  
+- Converts **FBX animation** into a sequence of **BODY-25/OpenPose** pose frames  
+- Optional **perspective projection mode for Root Motion**  
 - Handles **root motion** or **in-place** animation  
-- Automatic padding when fewer frames exist than requested  
-- Designed for **WAN2.2**, **AnimateDiff**, **Reactor**, **ControlNet**, **T2I Adapters**, etc.
 
----
 
 ## 📦 Requirements
 
@@ -24,8 +16,7 @@ Convert FBX animations into stable BODY-25 pose images aligned to any reference 
 | **Blender** | **3.6+** | ✔ | Must be installed for FBX extraction |
 | **ComfyUI** | Latest | ✔ | Node integrates into `custom_nodes` |
 | **Python** | 3.10–3.11 | ✔ | Use ComfyUI’s environment |
-| **FBX File** | Any animated FBX | ✔ | Must contain armature + animation |
-| **GPU** | Optional | – | Only required for downstream AI generation |
+| **FBX File** | supported animated FBX | ✔ | Must contain armature + animation |
 
 Download Blender 3.6 LTS:  
 https://www.blender.org/download/lts/3-6/
