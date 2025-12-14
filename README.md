@@ -108,3 +108,61 @@ Your FBX must have: A skeleton hierarchy,  Keyframed animation data,  A root bon
 <img width="678" height="604" alt="image" src="https://github.com/user-attachments/assets/832962e3-de85-496e-8733-c9cc609c13f4" />
 
 
+**Camera Director**   (Its more of a Skeleton Director than camera)
+I would always advise to disable the Wan22FunControlToVideo until you are happy with the animation, then re-enable it to generate the video
+There are two main controls, rotation and zoom.
+With rotation, if the FBX animation is 'InPlace' the rotation will rotation the OpenPose in an orbital basis where the FBX skeleton is the center of the pivot. so you are rotating on X0 Y0 of the object (assuming the fbx was created properly)
+If the FBX animation is a root, the pivot point is offset to the further distance of the animation from X0 Y), which means the slightest change in rotation values will manifest in perceived larger rotation depending on how fat the animation has moved from X0Y0. 
+So because the rotation works on degrees, 5 Degrees change can on a root anim where the skeleton is only 5m away from X0 Y0, may result in a small rotation, but if the anim is 30m away from X0Y0, the that same 5 degrees will move the animation alot more than thr 5m one. There is a Pivot.png in the Images folder of this custom node that may explain it better!
+
+Zoom is just what it says it is. 1.0 is the scale set as the default size in the Apose Image. The size of the person may vary on screen, but no matter their size, they will always be 1.0. A 0.1 increment either negative or positive is essential 10% of the original size, so of you zoom to -0.1, you are effectively shrinking by 90%.  If you want to disable the scale then set "Use 1st Image Ref Pose" Node to 'No' (purple color node)
+
+Both work by Frame number then a , (comma) then a value
+
+Rules. There are inbuilt restrictions that will prevent the animation from changing.
+1. You cannot have negative frame numbers
+2. Frame numbers MUST be sequential
+3. The last frame must be the number of frames -1, so on an 81 frame animation, your last frame number you can use is 80.
+4. Rotation (top multine) is the value is degrees and go from -60 to 60
+5. Zoom works on %, so 0.1 is a 10% change. Remember you are zooming the animation, not the camera.
+
+If you want a more 3D perspective feeling to root motion, use Perspective (Experimental) in the Projection mode.
+
+You can add as many frame changes as you want
+e.g for rotation you can do
+0, 0
+30, 20
+50, -20
+70, -20
+80, 5
+
+What this means is that from frame 0 to 30 it will rotate evenly from 0 to 20 degrees, then from 30 to 50, it will evenly rotate from 20 to -20 degrees (40 degree change). Then from 50 to 70 it wont rotate as the values are the same and then from 70 to 90 it will rotate from -20 to positive 5 degrees
+
+
+
+
+Defaults: 
+Camera View: Front
+Projection Mode: Perspective
+Color Mode: ControNet Colors
+Face Mode: Full Face
+Joint Size: 2
+Bone Thick: 1
+Zoom Factor: 1  (this is increase you dont connect the camera node, it offers basic control)
+Alignment Mode: Match Full Body
+
+Start Frame: The frame number you want to capture from
+End Frame: End last frame you want to capture from.
+
+"Frame Range" will calculate the frames between the start frame to the number of frames in the video length, so if you set you Frame Length to 81, it will capture 81 frames from the Start frame. 
+
+However, if you change the Step from 1 to 2, it will capture from 81 frames every 2nd frame, so effectively 0 to 160 step 2.
+
+Frame_Spread_TotalAnim:  This will evenly capture the  frame from Start to End. So I load a 227 frame animation and select Frame_Spread_TotalAnim, is will evenly calculate the frames over that 227 regardless of what you put in Frame_Step..
+e.g
+"frame_indices": [1, 4, 7, 9, 12, 15, 18, 21, 24, 26, 29, 32, 35, 38, 41, 43, 46, 49, 52, 55, 57, 60, 63, 66, 69, 72, 74, 77, 80, 83, 86, 89, 91, 94, 97, 100, 103, 106, 108, 111, 114, 117, 120, 122, 125, 128, 131, 134, 137, 139, 142, 145, 148, 151, 154, 156, 159, 162, 165, 168, 171, 173, 176, 179, 182, 185, 187, 190, 193, 196, 199, 202, 204, 207, 210, 213, 216, 219, 221, 224, 227]
+
+
+You have to be conscious of that although it was 81 frames, the large changes in frames will mean it will play back really fast, so make you keep an eye on the total frames in the anim and your Frame_End. If I adjust the Frame_End to 180, you then get this.
+[1, 3, 5, 8, 10, 12, 14, 17, 19, 21, 23, 26, 28, 30, 32, 35, 37, 39, 41, 44, 46, 48, 50, 52, 55, 57, 59, 61, 64, 66, 68, 70, 73, 75, 77, 79, 82, 84, 86, 88, 91, 93, 95, 97, 99, 102, 104, 106, 108, 111, 113, 115, 117, 120, 122, 124, 126, 129, 131, 133, 135, 137, 140, 142, 144, 146, 149, 151, 153, 155, 158, 160, 162, 164, 167, 169, 171, 173, 176, 178, 180]
+
