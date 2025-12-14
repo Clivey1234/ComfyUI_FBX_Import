@@ -1,4 +1,4 @@
-# FBX Import for Video
+# FBX Animation Import for Video
 Convert FBX animations into Controlnet Openpose images
 ---
 
