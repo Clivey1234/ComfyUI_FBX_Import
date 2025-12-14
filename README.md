@@ -9,6 +9,7 @@ Convert FBX animations into Controlnet Openpose images
 - If you cant animate, then just uses the FBXs available, they are everywhere!
 
 ## ⭐ Important
+- I have a life, so support will be extremely limnited, but please do any fork or code changes you want to.
 - Due to lots of issues recently with Comfyui stability, I cannot guarantee this wont break at some point
 - This method is far from perfect and suffers from all the same issues as Openpose does
 - Still having a little issue with head direction tracking, it works but not the best
