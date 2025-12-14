@@ -1,4 +1,4 @@
-# FBX Pose Blender BODY25 Match — ComfyUI Node  
+# FBX Import for Video
 Convert FBX animations into Controlnet Openpose images
 ---
 
