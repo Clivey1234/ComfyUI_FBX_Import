@@ -41,7 +41,7 @@ A headless Blender instance runs `fbx_pose_extract.py`, which:
 - Outputs `joint_data.json` with 3D joint positions per frame
 
 ### Step 2 — 3D → 2D Projection  
-The node converts FBX joints into a BODY-25 stickman:
+The node converts FBX joints into a BODY-25 pose:
 
 - Yaw correction (Auto Face Camera)  
 - Orthographic or perspective projection  
@@ -57,15 +57,15 @@ If you supply a stickman image (OpenPose/DWPose):
 ### Step 4 — Stickman Drawing  
 Finally, the skeleton is drawn into clean 2D frames using:
 
-- OpenPose / ControlNet colors  
+- OpenPose / ControlNet colours  
 - Adjustable line/joint sizes  
 - Optional FACE-70 pairing
 
 ---
 
-## 🧭 Node Parameters (Every Setting Explained)
+## 🧭 Node Parameters (Settings Explained)
 
-### 🔧 FBX Input  
+### 🔧 FBX Info  
 - **Blender_Executable** — path to Blender 3.6+  
 - **FBX_File** — path to your animated FBX  
 
@@ -75,57 +75,13 @@ Finally, the skeleton is drawn into clean 2D frames using:
   - `Frame_Range` (manual range)  
 - **Num_Frames** — total output frames  
 - **Start_Frame / End_Frame / Frame_Step** — used in range mode  
-- If fewer frames exist → last frame is padded  
-
-### 🖼 Output Settings  
-- **Output_Width / Output_Height** — resolution of output pose images  
-
-### 🎥 Camera & Projection  
-- **Camera_View**  
+- If fewer frames exist → last frame is padded
+- **Projection Mode** - Orthographic for InPlace and Perspective for root
+- **colour Mode** - Default to Controlnet colour scheme
+- **Alignment Mode** Default to full body matching, but depending on input image and animation, can be set to Upper Body only.
+- **Camera_View** - Front / Back / Left Side / Right Side / Top / Auto face
   - Front / Back / Left Side / Right Side / Top / Auto  
-- **Projection_Mode**  
-  - `Orthographic (Stable)`  
-  - `Perspective (Experimental)`  
-
-### 🎨 Appearance  
-- **Color_Mode**  
-  - White / OpenPose / ControlNet Colors  
-- **Face_Mode**  
-  - Off / BODY-25 dots / FACE-70 full  
-- **Joint_Size** — radius of circles  
-- **Line_Thickness** — bone line width  
-
-### 📏 Scaling & Motion  
-- **Zoom_Factor** — global scale of pose  
-- **Inplace**  
-  - ON → remove root motion  
-  - OFF → preserve root motion  
-
-### 🎯 Reference Alignment  
-- **Alignment_Mode**  
-  - Off  
-  - Match Full Body  
-  - Upper Body (Head-Hips)  
-  - Auto (Full/Partial)  
-- **Ref_Pose_Image** — optional stickman image input  
-
----
-
-## 📤 Outputs
-
-### **Pose_Images**
-A ComfyUI tensor containing the entire sequence of BODY-25 pose frames.
-
-### **Frame_Info**
-A JSON string including:
-
-- FBX file  
-- Frame extraction settings  
-- Camera view  
-- Alignment mode  
-- Projection mode  
-- Final scaling/centering information  
-
+- **Zoom_Factor** — Disabled if Camera Node conntected as that node will control zoom
 ---
 
 ✅ Supported FBX Files
