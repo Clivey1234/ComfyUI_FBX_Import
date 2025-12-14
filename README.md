@@ -10,8 +10,7 @@ Convert FBX animations into Controlnet Openpose images
 - Untested in Linux, I dont have it, so dont ask
 - Fork away if you want to recode for Linux
 - I steered away from Autodesk SDK due to them changing older SDK versions to remove python support
-- My testing machine: Windows 11, Comfyui portable, Blender 3.6
-- NVidia 507ti 16GB VRAM, i5-14600K, 64GB DDR5
+- My testing machine: Windows 11, Comfyui portable, Blender 3.6, 5070ti 16GB VRAM, i5-14600K, 64GB DDR5
 
 [![Watch the video](https://img.youtube.com/vi/GLFpgOq_m_c/maxresdefault.jpg)](https://youtu.be/GLFpgOq_m_c)
 
