@@ -53,7 +53,9 @@ https://www.blender.org/download/lts/3-6/
 - You will never need to open Blender, just install it.
 ---
 
-Two example FBXs in the workflow folder.
+
+**Two example FBXs in the workflow folder.**
+
 
 ## 🎥 How It Works
 
