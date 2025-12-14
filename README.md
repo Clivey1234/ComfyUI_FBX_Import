@@ -120,7 +120,9 @@ So because the rotation works on degrees, 5 Degrees change can on a root anim wh
 
 **Zoom**
 
-Zoom is just what it says it is. 1.0 is the scale set as the default size in the Apose Image. The size of the person may vary on screen, but no matter their size, they will always be 1.0. A 0.1 increment either negative or positive is essential 10% of the original size, so of you zoom to -0.1, you are effectively shrinking by 90%.  If you want to disable the scale then set "Use 1st Image Ref Pose" Node to 'No' (purple color node)
+Zoom is just what it says it is. 1.0 is the scale set as the default size in the Apose Image. The size of the person may vary on screen, but no matter their size, they will always be 1.0. A 0.1 increment either negative or positive is essential 10% of the original size, so of you zoom to -0.1, you are effectively shrinking by 90%.
+
+If you want to disable the scale of the ref image then set "Use 1st Image Ref Pose" Node to 'No' (purple color node) and the node will then calculate based on the amnimation scale
 
 Both work by Frame number then a , (comma) then a value
 
