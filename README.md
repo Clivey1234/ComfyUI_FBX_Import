@@ -25,9 +25,9 @@ https://www.blender.org/download/lts/3-6/
 
 ## 📥 Installation
 
-### 1. Install Blender 3.6+
-Ensure Blender is installed at a path similar to:
-
+### 1. Install Blender 3.6
+Ensure Blender is installed at a path similar to: "C:\Program Files\Blender Foundation\Blender 3.6\blender.exe"
+It wont work with earlier version, but untested with later versions
 
 ---
 
