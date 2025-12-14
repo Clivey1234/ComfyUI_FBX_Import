@@ -7,6 +7,7 @@ Convert FBX animations into Controlnet Openpose images
 - git clone https://github.com/Clivey1234/ComfyUI_FBX_Import.git
 - Example workflow in workflow folder with 2 example fbx animations
 - If you are trying to export from Maya/3DSMax  etc and it doesnt work, import the animation into unreal and re-export it to a FBX
+- **Support** There will be little to no support on the code, if it works for you great. I just dont have the time.
 
 ## ⭐ Why does this exist?
 - Because like most, I can never find the right video to copy the motion from
