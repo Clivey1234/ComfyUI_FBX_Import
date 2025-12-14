@@ -2,6 +2,10 @@
 Convert FBX animations into Controlnet Openpose images
 ---
 
+**Install**
+- CMD into your ComfyUI\custom_nodes folder
+- git clone https://github.com/Clivey1234/ComfyUI_FBX_Import.git
+
 ## ⭐ Why does this exist?
 - Because like most, I can never find the right video to copy the motion from
 - This opens Comfyui up to use 100,000s of animations to drive AI videos
