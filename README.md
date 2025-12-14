@@ -4,8 +4,8 @@ Convert FBX animations into Controlnet Openpose images
 
 ## ⭐ Why does this exist?
 - Because like most, I can never find the right video to copy the motion from
-- This opens Comfyui to now uses 100,000s of animations to drive videos
-- If you can animated even with little basic knowledge in Unreal/iclone for example, you can now control every single part of your movement
+- This opens Comfyui up to use 100,000s of animations to drive AI videos
+- If you can animated even with little basic knowledge in Unreal/iclone for example, you can now control every single frame of your movement
 - If you cant animate, then just uses the FBXs available, they are everywhere!
 
 ## ⭐ Important
