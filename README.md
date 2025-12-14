@@ -7,7 +7,7 @@ Convert FBX animations into Controlnet Openpose images
 - This opens Comfyui up to use 100,000s of animations to drive AI videos
 - If you can animated even with little basic knowledge in Unreal/iclone for example, you can now control every single frame of your movement
 - If you cant animate, then just uses the FBXs available, they are everywhere!
-- Blender (headless) is used to extract some joint informnation per frame into a json file, which the nodes then use to recreate an Openpose skeleton
+- Blender (headless) is used to extract some joint informnation per frame into a json file, which the nodes then use to recreate a skeleton
 
 ## ⭐ Important
 - I have a life, so support will be extremely limnited, but please do any fork or code changes you want to.
