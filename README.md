@@ -2,6 +2,17 @@
 Convert FBX animations into Controlnet Openpose images
 ---
 
+## ⭐ Important
+- Due to lots of issues recently with Comfyui stability, I cannot guarantee this wont break at some point
+- This is just a testing phase. It probably wont work on the cloud due to headless blender requirement
+- Untested in Linux, I dont have it, so dont ask
+- Fork away if you want to recode for Linux
+- I steered away from Autodesk SDK due to them changing older SDK versions to remove python support
+- My testing machine: Windows 11, Comfyui portable, Blender 3.6
+- NVidia 507ti 16GB VRAM, i5-14600K, 64GB DDR5
+
+
+
 ## ⭐ Features
 
 - Converts **FBX animation** into a sequence of **BODY-25/OpenPose** pose frames  
@@ -26,9 +37,9 @@ https://www.blender.org/download/lts/3-6/
 ## 📥 Installation
 
 ### 1. Install Blender 3.6
-Ensure Blender is installed at a path similar to: "C:\Program Files\Blender Foundation\Blender 3.6\blender.exe"
-It wont work with earlier version, but untested with later versions
-
+- Ensure Blender is installed at a path similar to: "C:\Program Files\Blender Foundation\Blender 3.6\blender.exe"
+- It wont work with earlier version, but untested with later versions
+- You will never need to open Blender, just install it.
 ---
 
 ## 🎥 How It Works
