@@ -4,6 +4,8 @@ Convert FBX animations into Controlnet Openpose images
 
 ## ⭐ Important
 - Due to lots of issues recently with Comfyui stability, I cannot guarantee this wont break at some point
+- This method is far from perfect and suffers from all the same issues as Openpose does
+- Still having a little issue with head direction tracking, it works but not the best
 - This is just a testing phase. It probably wont work on the cloud due to headless blender requirement
 - Untested in Linux, I dont have it, so dont ask
 - Fork away if you want to recode for Linux
@@ -11,6 +13,9 @@ Convert FBX animations into Controlnet Openpose images
 - My testing machine: Windows 11, Comfyui portable, Blender 3.6
 - NVidia 507ti 16GB VRAM, i5-14600K, 64GB DDR5
 
+[![Watch the video](https://img.youtube.com/vi/GLFpgOq_m_c/maxresdefault.jpg)](https://youtu.be/GLFpgOq_m_c)
+
+### [Watch this video on YouTube](https://youtu.be/GLFpgOq_m_c)
 
 
 ## ⭐ Features
