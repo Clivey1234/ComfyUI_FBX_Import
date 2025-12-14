@@ -2,6 +2,8 @@
 Convert FBX animations into Controlnet Openpose images
 ---
 
+**Edit:** uploaded Depth and Canny nodes, but these were early experiments and as no where neat as advanced as the Openpose, they are just there for education purposes
+
 **Install**
 - CMD into your ComfyUI\custom_nodes folder
 - git clone https://github.com/Clivey1234/ComfyUI_FBX_Import.git
