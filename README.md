@@ -1,5 +1,5 @@
 # FBX Animation Import for Video
-Convert FBX animations into Controlnet Openpose images
+Convert FBX animations into Controlnet Openpose
 ---
 
 **Edit:** uploaded Depth and Canny nodes, but these were early experiments and as no where neat as advanced as the Openpose, they are just there for education purposes
